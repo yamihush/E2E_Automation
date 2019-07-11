@@ -3,7 +3,7 @@ agent any
 stages{
 stage("Docker_Test"){
 steps{
-bat cmd.exe /C "mvn test && exit %%ERRORLEVEL%%"
+bat "mvn test"
 }
 }
 }
