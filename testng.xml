@@ -6,6 +6,7 @@
         <class name="yami.steps.login.BrowserInvoke1"/>
         <class name="yami.steps.login.BrowserInvoke2"/>
         <class name="yami.steps.login.BrowserInvoke3"/>
+        <class name="yami.steps.login.LoginSteps"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
