@@ -61,7 +61,7 @@ public class E2ETest {
 
         System.out.println(objHome.getLoginUserText());
 
-
+        System.out.println(objHome.getHomePageTitle());
 
     }
 
