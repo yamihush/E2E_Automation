@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import yami.pages.repos.HomePage;
@@ -60,6 +61,15 @@ public class E2ETest {
 
         System.out.println(objHome.getLoginUserText());
 
+
+
+    }
+
+
+    @AfterTest
+    public void tearDown(){
+
+        driver.quit();
     }
 
 }
