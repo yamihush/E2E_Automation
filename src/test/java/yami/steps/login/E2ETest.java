@@ -35,7 +35,7 @@ public class E2ETest {
 
     }
 
-    @Test
+    @Test(priority=1)
     public void loginScenario(){
 
 
@@ -65,6 +65,30 @@ public class E2ETest {
 
     }
 
+    @Test(priority=2)
+    public void addItemToCart(){
+
+        //Pre requsites
+        //     create a New User
+        //     add deliver address
+        //    add Payment details
+
+        // ---  Add an single Item to cart and remove the item in the cart.
+        //search the Item
+
+        objHome.searchProductItems("redmi note 6 pro");
+
+        System.out.println(objHome.getHomePageTitle());
+        Assert.assertEquals("Amazon.in: redmi note 6 pro",objHome.getHomePageTitle());
+
+        //open the product page
+        //select Buy Now option
+        // Go to cart
+        // select Delivery details
+        // remove item form cart
+        // ensure item removed form cart
+
+    }
 
     @AfterTest
     public void tearDown(){

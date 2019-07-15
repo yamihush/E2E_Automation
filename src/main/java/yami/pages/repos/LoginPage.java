@@ -1,7 +1,9 @@
 package yami.pages.repos;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 
 public class LoginPage {
@@ -11,39 +13,45 @@ public class LoginPage {
 
     WebDriver driver;
 
-    By loginUsername = By.xpath("//*[@id=\"ap_email\"]");
-    By loginCountinueBtn = By.xpath("//*[@id=\"continue\"]");
-    By loginPassword = By.xpath("//*[@id=\"ap_password\"]");
-    By signInSubmitBtn = By.xpath("//*[@id=\"signInSubmit\"]");
 
-
+    @FindBy(xpath = "//*[@id=\"ap_email\"]")
+            WebElement loginUsername;
+        @FindBy(xpath = "//*[@id=\"continue\"]")
+            WebElement loginCountinueBtn;
+    @FindBy(xpath = "//*[@id=\"ap_password\"]")
+            WebElement  loginPassword;
+    @FindBy(xpath = "//*[@id=\"signInSubmit\"]")
+            WebElement signInSubmitBtn;
 
     public LoginPage(WebDriver driver){
         this.driver = driver;
+        PageFactory.initElements(driver, this);
+
     }
 
     public LoginPage() {
-
     }
 
-
     public void inputUserName(String userName){
-        driver.findElement(loginUsername).sendKeys(userName);
+        loginUsername.sendKeys(userName);
     }
 
 
     public void clickCountinueBtn(){
-        driver.findElement(loginCountinueBtn).click();
+        loginCountinueBtn.click();
     }
 
 
     public void inputPassword(String password){
-
-        driver.findElement(loginPassword).sendKeys(password);
+        loginPassword.sendKeys(password);
     }
+
 
     public void clickSignInSubmitBtn(){
-        driver.findElement(signInSubmitBtn).click();
+        signInSubmitBtn.click();
     }
+
+
+
 
 }
