@@ -1,19 +1,35 @@
 package yami.pages.actions;
 
+import org.openqa.selenium.WebDriver;
 import yami.pages.repos.LoginPage;
 
-public class LoginPageAction {
+public class LoginPageAction  extends LoginPage{
 
-    LoginPage loginPage = new LoginPage();
-
-    public void login(String username, String password){
-        loginPage.inputUserName(username);
-        loginPage.inputPassword(password);
+    public LoginPageAction(WebDriver driver) {
+        super(driver);
     }
 
-    public void login(String username, String password, boolean shouldRemember){
-        login(username,password);
-
-
+    public void inputUserName(String userName){
+        loginUsername.sendKeys(userName);
     }
+
+
+    public void clickCountinueBtn(){
+        loginCountinueBtn.click();
+    }
+
+
+    public void inputPassword(String password){
+        loginPassword.sendKeys(password);
+    }
+
+
+    public void clickSignInSubmitBtn(){
+        signInSubmitBtn.click();
+    }
+
+
+
+
+
 }

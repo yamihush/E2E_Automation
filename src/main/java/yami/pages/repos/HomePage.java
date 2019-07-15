@@ -11,19 +11,23 @@ public class HomePage {
     //@Findby
     //WebElement homePageLogo;
 
-    WebDriver driver;
+    public WebDriver driver;
 
     @FindBy(xpath ="//*[@id=\"nav-link-accountList\"]")
-            WebElement signIn;
+    public
+    WebElement signIn;
 
     @FindBy(xpath = "//*[@id=\"nav-link-accountList\"]/span[1]")
-            WebElement userNameTxt;
+    public
+    WebElement userNameTxt;
 
     @FindBy(xpath = "//*[@id=\"twotabsearchtextbox\"]")
-            WebElement searchTxtBox;
+    public
+    WebElement searchTxtBox;
 
     @FindBy(xpath = "//*[@id=\"nav-search\"]/form/div[2]/div")
-            WebElement searchIcon;
+    public
+    WebElement searchIcon;
 
 
     //By signIn = By.xpath("//*[@id=\"nav-link-accountList\"]");
@@ -43,28 +47,4 @@ public class HomePage {
     }
 
 
-    public void clickSignIn(){
-
-            signIn.click();
-
-    }
-        //Get the title of Login Page
-
-    public String getHomePageTitle(){
-
-        return    driver.getTitle();
-
-    }
-
-    public String getLoginUserText(){
-
-        return userNameTxt.getText();
-    }
-
-    public void searchProductItems(String searchitem){
-
-        searchTxtBox.sendKeys(searchitem);
-        searchIcon.click();
-
-    }
 }

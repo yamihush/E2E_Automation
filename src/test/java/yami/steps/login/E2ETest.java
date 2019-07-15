@@ -9,6 +9,8 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import yami.pages.actions.HomePageAction;
+import yami.pages.actions.LoginPageAction;
 import yami.pages.repos.HomePage;
 import yami.pages.repos.LoginPage;
 
@@ -18,8 +20,8 @@ public class E2ETest {
 
     WebDriver driver;
 
-    HomePage objHome;
-    LoginPage objLogin;
+    HomePageAction objHome;
+    LoginPageAction objLogin;
 
 
     @BeforeTest
@@ -39,7 +41,8 @@ public class E2ETest {
     public void loginScenario(){
 
 
-        objHome = new HomePage(driver);
+        objHome = new HomePageAction(driver);
+
 
         Assert.assertEquals(objHome.getHomePageTitle(),"Online Shopping site in India: Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in");
 
@@ -47,7 +50,7 @@ public class E2ETest {
 
         objHome.clickSignIn();
 
-        objLogin = new LoginPage(driver);
+        objLogin = new LoginPageAction(driver);
 
         objLogin.inputUserName("yamihushh@gmail.com");
 
