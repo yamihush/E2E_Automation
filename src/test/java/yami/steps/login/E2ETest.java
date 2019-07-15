@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import yami.pages.actions.HomePageAction;
 import yami.pages.actions.LoginPageAction;
+import yami.pages.actions.SearchItemsListPageActions;
 import yami.pages.repos.HomePage;
 import yami.pages.repos.LoginPage;
 
@@ -22,7 +23,7 @@ public class E2ETest {
 
     HomePageAction objHome;
     LoginPageAction objLogin;
-
+    SearchItemsListPageActions objsrch;
 
     @BeforeTest
     public void setup(){
@@ -79,10 +80,16 @@ public class E2ETest {
         // ---  Add an single Item to cart and remove the item in the cart.
         //search the Item
 
+        objsrch = new SearchItemsListPageActions(driver);
+
         objHome.searchProductItems("redmi note 6 pro");
 
         System.out.println(objHome.getHomePageTitle());
         Assert.assertEquals("Amazon.in: redmi note 6 pro",objHome.getHomePageTitle());
+
+        Assert.assertTrue(objsrch.getSerchResultsPanePresent());
+
+        System.out.println(objsrch.getSearchResultsCount());
 
         //open the product page
         //select Buy Now option
