@@ -11,10 +11,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import yami.pages.actions.HomePageAction;
 import yami.pages.actions.LoginPageAction;
+import yami.pages.actions.ProductPageAction;
 import yami.pages.actions.SearchItemsListPageActions;
 import yami.pages.repos.HomePage;
 import yami.pages.repos.LoginPage;
+import yami.pages.repos.ProductPage;
 
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class E2ETest {
@@ -24,6 +27,7 @@ public class E2ETest {
     HomePageAction objHome;
     LoginPageAction objLogin;
     SearchItemsListPageActions objsrch;
+    ProductPageAction objproduct;
 
     @BeforeTest
     public void setup(){
@@ -70,7 +74,7 @@ public class E2ETest {
     }
 
     @Test(priority=2)
-    public void addItemToCart(){
+    public void addItemToCart() throws InterruptedException {
 
         //Pre requsites
         //     create a New User
@@ -90,6 +94,43 @@ public class E2ETest {
         Assert.assertTrue(objsrch.getSerchResultsPanePresent());
 
         System.out.println(objsrch.getSearchResultsCount());
+        String parentWinHandle = driver.getWindowHandle();
+
+        objsrch.getSearchListItemsName();
+        Thread.sleep(5000);
+
+        Set<String> winHandles = driver.getWindowHandles();
+        // Loop through all handles for New Window opened
+
+        for(String handle: winHandles) {
+            if (!handle.equals(parentWinHandle)) {
+                driver.switchTo().window(handle);
+                Thread.sleep(1000);
+                System.out.println("Title of the new window: " +
+                        driver.getTitle());
+            }
+
+        }
+
+        //Add product to cart form Product Page
+
+        objproduct = new ProductPageAction(driver);
+        objproduct.clickAddtoCartBtn();
+
+        Thread.sleep(5000);
+
+        System.out.println(objHome.getHomePageTitle());
+
+        // Close the New window and go to parent Window and verify in Cart that added product is present
+
+
+        driver.close();
+
+        driver.switchTo().window(parentWinHandle);
+
+        System.out.println(driver.getTitle());
+        System.out.println(objHome.getHomePageTitle());
+
 
         //open the product page
         //select Buy Now option

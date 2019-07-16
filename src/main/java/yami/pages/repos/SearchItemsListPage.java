@@ -18,6 +18,9 @@ public class SearchItemsListPage {
     public
     List<WebElement> searchAllElements;
 
+    @FindBy(xpath = "/div/div/div/div[2]/div[2]/div/div[1]/div/div/div[1]/h2/a")
+    public WebElement listContainer;
+
     public SearchItemsListPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
