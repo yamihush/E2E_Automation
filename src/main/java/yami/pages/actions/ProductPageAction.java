@@ -2,6 +2,7 @@ package yami.pages.actions;
 
 import org.openqa.selenium.WebDriver;
 import yami.pages.repos.ProductPage;
+import yami.utills.DriverClass;
 
 public class ProductPageAction extends ProductPage {
 
@@ -10,15 +11,17 @@ public class ProductPageAction extends ProductPage {
         super(driver);
     }
 
+    DriverClass objdc = new DriverClass(driver);
+
     public void clickBuyNowBtn(){
 
-        buyNowBtn.click();
+        objdc.clickWebElement(buyNowBtn);
 
     }
 
     public void clickAddtoCartBtn(){
 
-        addToCartBtn.click();
+        objdc.clickWebElement(addToCartBtn);
 
     }
 }

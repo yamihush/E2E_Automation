@@ -9,24 +9,7 @@ public class LoginPageAction  extends LoginPage{
         super(driver);
     }
 
-    public void inputUserName(String userName){
-        loginUsername.sendKeys(userName);
-    }
 
-
-    public void clickCountinueBtn(){
-        loginCountinueBtn.click();
-    }
-
-
-    public void inputPassword(String password){
-        loginPassword.sendKeys(password);
-    }
-
-
-    public void clickSignInSubmitBtn(){
-        signInSubmitBtn.click();
-    }
 
 
 

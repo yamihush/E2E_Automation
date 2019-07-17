@@ -28,5 +28,7 @@ public class SearchItemsListPageActions extends SearchItemsListPage {
         System.out.println(searchAllElements.get(0).findElement(By.tagName("h2")).getText());
         searchAllElements.get(0).findElement(By.tagName("h2")).click();
 
+
+
     }
 }

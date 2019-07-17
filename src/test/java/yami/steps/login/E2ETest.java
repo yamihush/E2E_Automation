@@ -1,21 +1,14 @@
 package yami.steps.login;
 
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import yami.pages.actions.HomePageAction;
-import yami.pages.actions.LoginPageAction;
-import yami.pages.actions.ProductPageAction;
-import yami.pages.actions.SearchItemsListPageActions;
-import yami.pages.repos.HomePage;
-import yami.pages.repos.LoginPage;
-import yami.pages.repos.ProductPage;
+import yami.pages.actions.*;
+import yami.utills.DriverClass;
 
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -23,11 +16,13 @@ import java.util.concurrent.TimeUnit;
 public class E2ETest {
 
     WebDriver driver;
-
-    HomePageAction objHome;
+    DriverClass objdc;
+    HomePageNavBarAction objHome;
     LoginPageAction objLogin;
     SearchItemsListPageActions objsrch;
     ProductPageAction objproduct;
+    ShoppingCartPageAction objshopcart;
+
 
     @BeforeTest
     public void setup(){
@@ -46,30 +41,27 @@ public class E2ETest {
     public void loginScenario(){
 
 
-        objHome = new HomePageAction(driver);
+        objHome = new HomePageNavBarAction(driver);
+        objdc = new DriverClass(driver);
 
+        Assert.assertEquals(objdc.getTitle(),"Online Shopping site in India: Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in");
 
-        Assert.assertEquals(objHome.getHomePageTitle(),"Online Shopping site in India: Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in");
+        System.out.println(objdc.getTitle());
 
-        System.out.println(objHome.getHomePageTitle());
+        objHome.signIn("yamihushh@gmail.com","Logout@123");
 
-        objHome.clickSignIn();
-
-        objLogin = new LoginPageAction(driver);
-
-        objLogin.inputUserName("yamihushh@gmail.com");
-
-        objLogin.clickCountinueBtn();
-
-        objLogin.inputPassword("Logout@123");
-
-        objLogin.clickSignInSubmitBtn();
 
         Assert.assertEquals("Hello, Muthukumar" , objHome.getLoginUserText());
 
+
         System.out.println(objHome.getLoginUserText());
 
-        System.out.println(objHome.getHomePageTitle());
+
+
+
+        System.out.println("The Cart Count is : " + objHome.getCartValue());
+
+        System.out.println(objdc.getTitle());
 
     }
 
@@ -88,12 +80,13 @@ public class E2ETest {
 
         objHome.searchProductItems("redmi note 6 pro");
 
-        System.out.println(objHome.getHomePageTitle());
-        Assert.assertEquals("Amazon.in: redmi note 6 pro",objHome.getHomePageTitle());
+        System.out.println(objdc.getTitle());
+        Assert.assertEquals("Amazon.in: redmi note 6 pro",objdc.getTitle());
 
         Assert.assertTrue(objsrch.getSerchResultsPanePresent());
 
         System.out.println(objsrch.getSearchResultsCount());
+
         String parentWinHandle = driver.getWindowHandle();
 
         objsrch.getSearchListItemsName();
@@ -119,7 +112,7 @@ public class E2ETest {
 
         Thread.sleep(5000);
 
-        System.out.println(objHome.getHomePageTitle());
+        System.out.println("****Now in Child Window " +objdc.getTitle());
 
         // Close the New window and go to parent Window and verify in Cart that added product is present
 
@@ -128,8 +121,31 @@ public class E2ETest {
 
         driver.switchTo().window(parentWinHandle);
 
-        System.out.println(driver.getTitle());
-        System.out.println(objHome.getHomePageTitle());
+
+        //Refresh the Page
+
+        driver.get(driver.getCurrentUrl());
+
+        System.out.println("****Now in Parent Window " + driver.getTitle());
+
+        // Validate cart value is increased
+
+        System.out.println("The Cart Count is : " + objHome.getCartValue());
+
+        System.out.println("****Now in Parent Window " + objdc.getTitle());
+
+        // Go to Cart
+
+        objHome.openCartPage();
+
+        System.out.println("****Now in Parent Window " + objdc.getTitle());
+
+        // Remove the Product that added to Cart
+        objshopcart = new ShoppingCartPageAction(driver);
+
+        System.out.println(objshopcart.getCountInShoppingList());
+
+        objshopcart.deleteProductInshoppingCart();
 
 
         //open the product page
